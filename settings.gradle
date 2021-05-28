@@ -1,0 +1,3 @@
+rootProject.name = "CustomPagination"
+include ':app'
+include ':pagination'
