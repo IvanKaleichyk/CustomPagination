@@ -17,7 +17,7 @@ abstract class PaginationListener(
 
     private var currentPage = 1
 
-    val state = MutableStateFlow<PagingState>(PagingState.WaitingForLoading)
+    internal val state = MutableStateFlow<PagingState>(PagingState.WaitingForLoading)
 
     fun loadFirstData() {
         showLog("loadFirstData")

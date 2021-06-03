@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.RecyclerView
 import coil.clear
 import coil.load
@@ -16,13 +17,17 @@ import com.kaleichyk.pagination.viewHolders.ErrorViewHolder
 import com.kaleichyk.pagination.viewHolders.LoadingViewHolder
 import com.kaleichyk.pagination.viewHolders.ShowDataViewHolder
 
-class MainAdapter : PagingAdapter<DataItem>(
+class MainAdapter(
+    paginationListener: MainPaginationListener,
+    lifecycle: Lifecycle,
+    onAddNewItem: (addToList: List<DataItem>) -> Unit
+) : PagingAdapter<DataItem>(
+    paginationListener,
+    lifecycle,
+    onAddNewItem,
     object : PagingDiffUtil<DataItem> {
         override fun compare(o1: DataItem, o2: DataItem): Int =
             (o1.dateGetting - o2.dateGetting).toInt()
-
-        override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean =
-            oldItem.dateGetting == newItem.dateGetting
 
         override fun areItemsTheSame(item1: DataItem, item2: DataItem): Boolean =
             item1 == item2
